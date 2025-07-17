@@ -34,5 +34,24 @@ document.addEventListener("DOMContentLoaded", function () {
         card.style.display = 'flex';
     });
 
+    // Filter by category buttons
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const type = button.dataset.type;
+
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            cards.forEach(card => {
+                if (type === 'all' || card.dataset.type === type) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            if (searchInput) searchInput.value = ''; // clear search box when filtering
+        });
+    });
 
 });
