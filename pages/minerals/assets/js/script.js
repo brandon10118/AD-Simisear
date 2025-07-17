@@ -79,4 +79,26 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // Quantity increment/decrement
+    const minusButtons = document.querySelectorAll('.minus');
+    const plusButtons = document.querySelectorAll('.plus');
+    const inputBoxes = document.querySelectorAll('.input-box');
+
+    minusButtons.forEach((minusButton, idx) => {
+        const inputBox = inputBoxes[idx];
+        if (inputBox) {
+            minusButton.addEventListener('click', () => {
+                inputBox.stepDown();
+            });
+        }
+    });
+
+    plusButtons.forEach((plusButton, idx) => {
+        const inputBox = inputBoxes[idx];
+        if (inputBox) {
+            plusButton.addEventListener('click', () => {
+                inputBox.stepUp();
+            });
+        }
+    });
 });
