@@ -17,6 +17,26 @@ class MineralRepository
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
- 
+    public function searchMinerals(string $search, string $type): array
+    {
+        $query = "SELECT * FROM minerals WHERE 1=1";
+        $params = [];
+
+        if (!empty($search)) {
+            $query .= " AND name ILIKE :search";
+            $params[':search'] = '%' . $search . '%';
+        }
+
+        if (!empty($type) && $type !== 'all') {
+            $query .= " AND type = :type";
+            $params[':type'] = $type;
+        }
+
+        $query .= " ORDER BY name";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute($params);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 
