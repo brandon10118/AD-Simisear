@@ -50,4 +50,16 @@ class Auth
             'password' => $hash,
         ]);
     }
+
+    public static function logout(): void
+    {
+        self::init();
+        session_destroy();
+    }
+
+    public static function user(): ?array
+    {
+        self::init();
+        return $_SESSION['user'] ?? null;
+    }
 }
