@@ -4,7 +4,7 @@ services:
       context: .
     container_name: ad-simisear-service
     ports:
-      - "8000:8000"
+      - "6090:8000"
     develop:
       watch:
         - path: .
@@ -15,6 +15,7 @@ services:
         - path: ./composer.lock
           action: rebuild
     depends_on:
+      - postgresql
       - mongodb
 
   mongodb:
@@ -23,9 +24,9 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: rootPassword
-      MONGO_INITDB_DATABASE: mydatabase
+      MONGO_INITDB_DATABASE: simisear-mongodb
     ports:
-      - "27111:27017"
+      - "26969:27017"
     volumes:
       - ad-simisear-mongodb:/data/db/mongodb
 
@@ -36,9 +37,9 @@ services:
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: mydatabase
+      POSTGRES_DB: simisear-postgresql
     ports:
-      - "5112:5432"
+      - "5269:5432"
     volumes:
       - ad-simisear-postgresql:/data/db/postgresql
 
