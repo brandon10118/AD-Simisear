@@ -4,7 +4,7 @@
 
 <br />
 <div align="center">
-  <a href="https://github.com/Buenaventura123/AD-Activity-1">
+  <a href="https://github.com/brandon10118/AD-Simisear">
     <img src="./assets/img/simisear.png" alt="Simisear" width="130" height="100">
   </a>
   <h3 align="center">Simisear Mining</h3>
@@ -13,7 +13,7 @@
 <br />
 
 
-![](https://visit-counter.vercel.app/counter.png?page=Buenaventura123/AD-Activity-1)
+![](https://visit-counter.vercel.app/counter.png?page=brandon10118/AD-Simisear)
 
 
 
