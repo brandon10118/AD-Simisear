@@ -1,0 +1,35 @@
+{
+    "name": "brandon10118/AD-Simisear",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Rylie-Buenaventura",
+            "email": "202310536@fit.edu.ph"
+        },
+        {
+            "name": "Jethro-Wang",
+            "email": "202311220@fit.edu.ph"
+        },
+        {
+            "name": "Don-Zaimone_Miranda",
+            "email": "202310159@fit.edu.ph"
+        },
+        {
+            "name": "John-Col",
+            "email": "202310280@fit.edu.ph"
+        },
+        {
+            "name": "Brandon-Pico",
+            "email": "202310118@fit.edu.ph"
+        }
+    ],
+    "scripts": {
+          "start": "php -S localhost:8000 router.php",
+          "postgresql:reset": "docker compose exec web-app-php php utils/dbResetPostgresql.util.php",
+          "postgresql:seed": "docker compose exec web-app-php php utils/dbSeederPostgresql.util.php",
+          "postgresql:migrate": "docker compose exec web-app-php php utils/dbMigratePostgresql.util.php"
+    },
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
+}
