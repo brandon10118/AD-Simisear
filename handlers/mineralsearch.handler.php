@@ -40,3 +40,13 @@ class MineralRepository
     }
 }
 
+function getSearchedMinerals(): array
+{
+    $db = getDatabaseConnection();
+    $repo = new MineralRepository($db);
+
+    $searchTerm = $_GET['search'] ?? '';
+    $categoryFilter = $_GET['category'] ?? '';
+
+    return $repo->searchMinerals($searchTerm, $categoryFilter);
+}
