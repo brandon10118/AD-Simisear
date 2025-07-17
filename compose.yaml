@@ -1,8 +1,10 @@
 services:
-  ad-simisear:
+  web-app-php:
     build:
       context: .
-    container_name: ad-simisear-service
+    volumes:
+      - .:/var/www/html
+    container_name: web-app-php-service-final-project
     ports:
       - "6090:8000"
     develop:
@@ -20,31 +22,31 @@ services:
 
   mongodb:
     image: mongo:latest
-    container_name: ad-simisear-mongodb
+    container_name: web-app-php-mongodb-final-project
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: rootPassword
-      MONGO_INITDB_DATABASE: simisear-mongodb
+      MONGO_INITDB_DATABASE: finalproject
     ports:
       - "26969:27017"
     volumes:
-      - ad-simisear-mongodb:/data/db/mongodb
+      - web-app-php-mongodb:/data/db/mongodb
 
   postgresql:
     image: postgres:15
-    container_name: ad-simisear-postgresql
+    container_name: web-app-php-postgresql-final-project
     restart: always
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: simisear-postgresql
+      POSTGRES_DB: finalproject
     ports:
       - "5269:5432"
     volumes:
-      - ad-simisear-postgresql:/data/db/postgresql
+      - web-app-php-postgresql:/data/db/postgresql
 
 volumes:
-  ad-simisear-mongodb:
+  web-app-php-mongodb:
     driver: local
-  ad-simisear-postgresql:
+  web-app-php-postgresql:
     driver: local
