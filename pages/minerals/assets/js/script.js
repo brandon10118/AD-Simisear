@@ -54,4 +54,29 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+    // Live search system
+    if (searchInput) {
+        searchInput.addEventListener('input', () => {
+            const filter = searchInput.value.toLowerCase();
+
+            cards.forEach(card => {
+                const name = card.querySelector('h2') ? card.querySelector('h2').textContent.toLowerCase() : '';
+                const origin = card.querySelector('p:nth-of-type(1)') ? card.querySelector('p:nth-of-type(1)').textContent.toLowerCase() : '';
+                const type = card.dataset.type ? card.dataset.type.toLowerCase() : '';
+                const description = card.querySelector('p:nth-of-type(3)') ? card.querySelector('p:nth-of-type(3)').textContent.toLowerCase() : '';
+
+                if (
+                    name.includes(filter) ||
+                    origin.includes(filter) ||
+                    type.includes(filter) ||
+                    description.includes(filter)
+                ) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    }
+
 });
