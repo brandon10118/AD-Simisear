@@ -16,6 +16,12 @@ if ($action === 'login') {
         header('Location: /page/login/index.php?error=Invalid%20credentials');
         exit;
     }
+} elseif ($action === 'signup') {
+    $name = $_POST['name'] ?? '';
+    $email = $_POST['email'] ?? '';
+    $password = $_POST['password'] ?? '';
+    $success = Auth::signup($name, $email, $password);
+
 } else {
     header('Location: /page/login/index.php?error=Unknown%20action');
     exit;
