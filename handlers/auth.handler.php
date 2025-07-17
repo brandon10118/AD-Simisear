@@ -21,7 +21,13 @@ if ($action === 'login') {
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
     $success = Auth::signup($name, $email, $password);
-
+    if ($success) {
+        header('Location: /index.php');
+        exit;
+    } else {
+        header(header: 'Location: /page/login/index.php?error=Email%20already%20exists');
+        exit;
+    }
 } else {
     header('Location: /page/login/index.php?error=Unknown%20action');
     exit;
