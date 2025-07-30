@@ -56,6 +56,32 @@ class ProductRepository {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+    public function addProduct(string $name, string $description, float $price, string $category, int $stock, string $image = ''): bool {
+        $stmt = $this->db->prepare("
+            INSERT INTO products (name, description, price, category, stock, image) 
+            VALUES (:name, :description, :price, :category, :stock, :image)
+        ");
+        
+        return $stmt->execute([
+            ':name' => $name,
+            ':description' => $description,
+            ':price' => $price,
+            ':category' => $category,
+            ':stock' => $stock,
+            ':image' => $image
+        ]);
+    }
+
+    public function deleteProduct($productId): bool {
+        try {
+            $stmt = $this->db->prepare("DELETE FROM products WHERE id = :id");
+            return $stmt->execute([':id' => $productId]);
+        } catch (PDOException $e) {
+            error_log("Failed to delete product: " . $e->getMessage());
+            return false;
+        }
+    }
+
 
 }
 
@@ -87,6 +113,33 @@ class MineralRepository {
             ':additional' => $additionalStock,
             ':id' => $mineralId
         ]);
+    }
+
+    public function addMineral(string $name, string $origin, string $type, string $description, float $price, int $stock, string $image = ''): bool {
+        $stmt = $this->db->prepare("
+            INSERT INTO minerals (name, origin, type, description, price, stock, image) 
+            VALUES (:name, :origin, :type, :description, :price, :stock, :image)
+        ");
+        
+        return $stmt->execute([
+            ':name' => $name,
+            ':origin' => $origin,
+            ':type' => $type,
+            ':description' => $description,
+            ':price' => $price,
+            ':stock' => $stock,
+            ':image' => $image
+        ]);
+    }
+
+    public function deleteMineral($mineralId): bool {
+        try {
+            $stmt = $this->db->prepare("DELETE FROM minerals WHERE id = :id");
+            return $stmt->execute([':id' => $mineralId]);
+        } catch (PDOException $e) {
+            error_log("Failed to delete mineral: " . $e->getMessage());
+            return false;
+        }
     }
 }
 

@@ -1,5 +1,14 @@
 <?php
 require_once BASE_PATH . '/bootstrap.php';
+require_once UTILS_PATH . '/auth.util.php';
+
+// Initialize auth and check if user is logged in
+Auth::init();
+if (!Auth::user()) {
+    header('Location: /page/login/index.php');
+    exit();
+}
+
 require_once LAYOUT_PATH . '/main.layout.php';
 require_once COMPONENT_PATH . '/componentGroup/navbar.component.php';
 require_once COMPONENT_PATH . '/componentGroup/footer.component.php';

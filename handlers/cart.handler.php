@@ -1,8 +1,19 @@
 <?php
 require_once UTILS_PATH . '/dbConnection.util.php';
 require_once UTILS_PATH . '/dbRepository.util.php';
+require_once UTILS_PATH . '/auth.util.php';
 
 function handleCartLogic(): array {
+    // Initialize session and check authentication
+    Auth::init();
+    $user = Auth::user();
+    
+    // Redirect to login if not authenticated
+    if (!$user) {
+        header('Location: /page/login/index.php?error=Please%20login%20to%20access%20your%20cart');
+        exit;
+    }
+
     $db = getDatabaseConnection();
     $productRepo = new ProductRepository($db);
     $mineralRepo = new MineralRepository($db);

@@ -3,8 +3,14 @@ require_once BASE_PATH . '/bootstrap.php';
 require_once LAYOUT_PATH . '/main.layout.php';
 require_once COMPONENT_PATH . '/componentGroup/navbar.component.php';
 require_once COMPONENT_PATH . '/componentGroup/footer.component.php';
+require_once UTILS_PATH . '/auth.util.php';
 require_once HANDLERS_PATH . '/mineralsearch.handler.php';
 require_once HANDLERS_PATH . '/renderMineralCards.handler.php';
+
+// Initialize session and check if user is logged in
+Auth::init();
+$user = Auth::user();
+$isLoggedIn = $user !== null;
 
 $minerals = getSearchedMinerals();
 ?>
@@ -47,12 +53,25 @@ $minerals = getSearchedMinerals();
     </div>
 
     <div class="minerals-container">
-        <form method="POST" action="/page/addtocart/index.php">
+        <?php if ($isLoggedIn): ?>
+            <form method="POST" action="/page/addtocart/index.php">
+                <div class="mineral-list" id="mineralsContainer">
+                    <?php renderMineralCards($minerals); ?>
+                </div>
+                <button type="submit" class="add-cart">Add to Cart</button>
+            </form>
+        <?php else: ?>
             <div class="mineral-list" id="mineralsContainer">
-                <?php renderMineralCards($minerals); ?>
+                <?php renderMineralCards($minerals, false); ?>
             </div>
-            <button type="submit" class="add-cart">Add to Cart</button>
-        </form>
+            <div class="login-prompt">
+                <div class="login-message">
+                    <h3>🔒 Login Required</h3>
+                    <p>You need to be logged in to add minerals to your cart and make purchases.</p>
+                    <a href="/page/login/index.php" class="login-btn">Login / Sign Up</a>
+                </div>
+            </div>
+        <?php endif; ?>
     </div>
 </div>
 

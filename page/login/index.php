@@ -3,6 +3,9 @@ declare(strict_types=1);
 require_once BASE_PATH . '/bootstrap.php';
 require_once UTILS_PATH . '/auth.util.php';
 Auth::init();
+
+// Check for error message
+$error = $_GET['error'] ?? '';
 ?>
 
 <!DOCTYPE html>
@@ -17,6 +20,13 @@ Auth::init();
 </head>
 
 <body>
+    <?php if (!empty($error)): ?>
+        <div class="error-message" id="errorMessage">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></span>
+            <button class="close-btn" onclick="closeError()">&times;</button>
+        </div>
+    <?php endif; ?>
     <div class="container" id="container">
         <div class="form-container sign-up">
             <form action="/handlers/auth.handler.php?action=signup" method="POST">

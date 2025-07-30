@@ -28,6 +28,10 @@ if ($action === 'login') {
         header(header: 'Location: /page/login/index.php?error=Email%20already%20exists');
         exit;
     }
+} elseif ($action === 'logout') {
+    Auth::logout();
+    header('Location: /index.php?message=Successfully%20logged%20out');
+    exit;
 } else {
     header('Location: /page/login/index.php?error=Unknown%20action');
     exit;
